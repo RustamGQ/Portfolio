@@ -1,0 +1,108 @@
+@use "../../style/main.scss" as *;
+
+.skills {
+  padding-top: 8px;
+  padding-bottom: 40px;
+  background-color: rgb(231, 231, 231);
+  &__title {
+    color: chocolate;
+    margin-bottom: 25px;
+    font-size: rem(24px);
+  }
+
+  &__wrapper {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 rem(45px);
+    gap: rem(20px); // немного пространства
+
+    &-img {
+      position: relative; // обязательно для ::after
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: transform 0.3s ease;
+      cursor: pointer;
+
+      // Линия под иконкой
+      &::after {
+        content: '';
+        position: absolute;
+        left: 0;
+        bottom: -10px;
+        height: 2px;
+        width: 0;
+        background-color: transparent;
+        transition: width 0.3s ease, background-color 0.3s ease;
+      }
+
+      &:hover {
+        transform: scale(1.1);
+      }
+
+      &:hover::after {
+        width: var(--percent-width);
+        background-color: var(--percent-color);
+      }
+
+      // Текст процентов
+      .skills__wrapper-img-percent {
+        position: absolute;
+        bottom: -28px; // чуть ниже линии
+        left: 0;
+        font-size: rem(12px);
+        color: var(--percent-color);
+        opacity: 0;
+        transition: opacity 0.3s ease;
+        pointer-events: none;
+        user-select: none;
+      }
+
+      &:hover .skills__wrapper-img-percent {
+        opacity: 1;
+      }
+
+      // Индивидуальные размеры и бордер радиус для некоторых иконок
+      &-scss,
+      &-bem,
+      &-chatgpt {
+        img {
+          width: 55px;
+          height: 55px;
+          border-radius: 10px;
+        }
+      }
+    }
+  }
+}
+
+.skills__wrapper-img {
+  position: relative;
+  width: 60px;
+  transition: transform 0.7s ease;
+
+  &:hover .skills__progress {
+    opacity: 1;
+  }
+
+  &.hint {
+    animation: pulse 1.2s ease-in-out infinite;
+  }
+}
+
+@keyframes pulse {
+  0% {
+    transform: scale(1);
+    opacity: 1;
+  }
+  50% {
+    transform: scale(1.10);
+    opacity: 0.85;
+  }
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+

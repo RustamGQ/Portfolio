@@ -1,0 +1,14 @@
+@use "sass:math";
+$font-size-base: 16px;
+
+
+@function rem($px) {
+    @return math.div($px, $font-size-base) * 1rem;
+}
+
+
+.container {
+  max-width: 1460px;
+  padding: 0 30px;
+  margin: 0 auto;
+}
